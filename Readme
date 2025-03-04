@@ -55,6 +55,7 @@ Ensure your MongoDB server is running. Use MongoDB Compass or the command line t
 Load Test Data with Fixtures:
 
 
+php bin/console doctrine:mongodb:fixtures:load
 
 
 5. Run the Symfony Server:  
