@@ -1,0 +1,44 @@
+
+
+
+### Symfony ###
+/var/
+/vendor/
+/public/build/
+/public/bundles/
+/node_modules/
+
+# Environment variables and local config
+
+
+# Symfony secrets (if using Symfony's secrets management)
+config/secrets/
+
+# Cache and log files
+/var/cache/
+/var/log/
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# PHPUnit results
+/phpunit.xml
+/phpunit.xml.dist
+*.phpunit.result.cache
+
+# Composer lock file (optional, if you want to commit it, remove this line)
+composer.lock
+
+### MongoDB ###
+# Ignore database dump files (if any)
+dump/
+*.bson
+*.json
+
+### OS / System Files ###
+.DS_Store
+Thumbs.db
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

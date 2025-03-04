@@ -1,0 +1,37 @@
+security:
+    # https://symfony.com/doc/current/security.html#c-hashing-passwords
+    password_hashers:
+        App\Document\User:
+            algorithm: auto # Uses bcrypt by default
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            mongodb:
+                class: App\Document\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/_(profiler|wdt)
+            security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: api_login
+                username_path: email # Map JSON "email" field to Symfony's "username"
+
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/
+            stateless: true
+            jwt: ~
+
+        access_control:
+            #   - { path: ^/api/login, roles: PUBLIC_ACCESS }
+            #   - { path: ^/api/register, roles: PUBLIC_ACCESS }
+            #   - { path: ^/users/me, roles: IS_AUTHENTICATED_FULLY }
