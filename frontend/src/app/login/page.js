@@ -2,7 +2,6 @@
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/auth'
 import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
 import Link from 'next/link'
 
 export default function Login() {

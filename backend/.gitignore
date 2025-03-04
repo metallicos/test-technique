@@ -34,7 +34,7 @@ composer.lock
 # Ignore database dump files (if any)
 dump/
 *.bson
-*.json
+
 
 ### OS / System Files ###
 .DS_Store

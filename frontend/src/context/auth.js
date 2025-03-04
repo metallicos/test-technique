@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 const AuthContext = createContext()
 
@@ -21,6 +22,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   const verifyToken = useCallback(async (token) => {
     const decoded = decodeJWT(token)
@@ -62,6 +64,8 @@ export function AuthProvider({ children }) {
     setUser(null)
     setToken(null)
     toast.success('Logged out successfully')
+    router.push('/')
+
   }, [])
 
   useEffect(() => {
@@ -133,7 +137,7 @@ export function AuthProvider({ children }) {
       }
       return false
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed')
+      toast.error(error.response?.data?.error?.message || 'Registration failed')
       return false
     }
   }
