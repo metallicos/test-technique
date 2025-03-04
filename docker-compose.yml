@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: symfony_backend
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    depends_on:
+      - mongodb
+    environment:
+      DATABASE_URL: "mongodb://mongodb:27017/your_database_name"
+      APP_ENV: dev
+      APP_DEBUG: 1
+      JWT_PASSPHRASE: "your_jwt_passphrase"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nextjs_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

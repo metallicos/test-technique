@@ -26,7 +26,7 @@ cd test-technique/backend
 
 2. Install Dependencies:  
 composer install  
-3. enerate JWT Token Keys:
+3. generate JWT Token Keys:
 
 Create a config/jwt directory:
 mkdir -p config/jwt
